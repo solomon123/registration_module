@@ -41,10 +41,6 @@ function listener_registration_showRegistrationForm(){
         '#type'=>'textfield',
         '#title'=>'Email'
     );
-    $form['dateofbirth']=array(
-        '#type'=>'textfield',
-        '#title'=>'Date of birth'
-    );
     $form['address']=array(
         '#type'=>'textfield',
         '#title'=>'address'
