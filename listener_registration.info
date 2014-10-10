@@ -1,0 +1,6 @@
+name = Listener Registration
+description = Listener Registration API
+package = Registration
+core = 7.x
+
+

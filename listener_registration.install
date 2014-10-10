@@ -1,0 +1,67 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the listeners module.
+ */
+
+
+
+/**
+ * Implements hook_schema().
+ */
+function listener_registration_schema() {
+
+    $schema['listener_registration'] = array(
+  'description' => 'Members Registration table!',
+  'fields' => array(
+    'uid' => array(
+      'description' => 'member ID!',
+      'type' => 'int',
+      'not null' => TRUE,
+    ),
+    'last_name' => array(
+      'description' => 'Member last name!',
+      'type' => 'varchar',
+      'length' => '50',
+      'not null' => TRUE,
+    ),
+    'first_name' => array(
+      'description' => 'Memeber first name!',
+      'type' => 'varchar',
+      'length' => '50',
+      'not null' => TRUE,
+    ),
+    'email' => array(
+      'description' => 'members email!',
+      'type' => 'varchar',
+      'length' => '50',
+      'not null' => TRUE,
+    ),
+    'address' => array(
+      'description' => 'Members street address!',
+      'type' => 'varchar',
+      'length' => '100',
+      'not null' => TRUE,
+    ),
+    'city' => array(
+      'description' => 'Members City!',
+      'type' => 'varchar',
+      'length' => '100',
+      'not null' => TRUE,
+    ),
+    'state' => array(
+      'description' => 'Membrs State!',
+      'type' => 'varchar',
+      'length' => '50',
+      'not null' => TRUE,
+    ),
+  ),
+  'indexes' => array(
+    'uid' => array('uid'),
+  ),
+);
+
+    return $schema;
+}
+        

@@ -1,0 +1,93 @@
+<?php
+
+/**
+ * Implements hook_init().
+*/
+function listener_registration_init(){
+    //drupal_set_message("Please enter your detail again");
+    
+}
+
+//hook_menu()
+function listener_registration_menu(){
+    $items=array();
+    
+    $items['registrationform']=array(
+        
+        'title'=>'Registration Form',
+        'discription'=>'member listeners registration form',
+        'page callback'=>'drupal_get_form',
+        'page arguments'=>array('listener_registration_showRegistrationForm'),
+        'access callback'=>'user_access',
+        'access arguments'=>array('access content'),
+        'type'=>MENU_NORMAL_ITEM
+        
+    );
+    return $items;
+}
+
+function listener_registration_showRegistrationForm(){
+    $form=array();
+    
+    $form['last_name']=array(
+        '#type'=>'textfield',
+        '#title'=>'Enter your last name'
+    );
+    $form['first_name']=array(
+        '#type'=>'textfield',
+        '#title'=>'Enter your first name'
+    );
+    $form['email']=array(
+        '#type'=>'textfield',
+        '#title'=>'Email'
+    );
+    $form['dateofbirth']=array(
+        '#type'=>'textfield',
+        '#title'=>'Date of birth'
+    );
+    $form['address']=array(
+        '#type'=>'textfield',
+        '#title'=>'address'
+    );
+    $form['city']=array(
+        '#type'=>'textfield',
+        '#title'=>'City'
+    );
+    $form['state']=array(
+        '#type'=>'textfield',
+        '#title'=>'State'
+    );
+    
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => 'Register'
+    );
+    
+    $form['#submit'][]='listener_registration_submit';
+    return $form;
+}
+
+function listener_registration_submit($form, &$form_state){
+    if($form_state['values']['first_name']==""||$form_state['values']['first_name']==""){
+     form_set_error('first_name', 'First or Last name can not be empty, please try again');   
+    }else if(!valid_email_address( $form_state['values']['email'])) {
+        form_set_error('email', "Please enter a valid email");
+    }else{
+    //drupal_set_message("hello ".$form_state['values']['first_name']." ".$form_state['values']['last_name']);
+   
+   db_insert('listener_registration')
+    ->fields(array(
+      
+      'last_name' => filter_xss($form_state['values']['last_name']),
+      'first_name' => filter_xss($form_state['values']['first_name']),
+      'email' => filter_xss($form_state['values']['email']),
+      'address' => filter_xss($form_state['values']['address']),
+      'city' => filter_xss($form_state['values']['city']),
+      'state' => filter_xss($form_state['values']['state'])
+    ))
+    ->execute();
+        
+    }
+}
+
+ 
