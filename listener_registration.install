@@ -16,9 +16,10 @@ function listener_registration_schema() {
   'description' => 'Members Registration table!',
   'fields' => array(
     'uid' => array(
-      'description' => 'member ID!',
-      'type' => 'int',
-      'not null' => TRUE,
+      'description' => 'Primary Key: Unique authmap ID.',
+        'type' => 'serial',
+        'not null' => TRUE,
+        
     ),
     'last_name' => array(
       'description' => 'Member last name!',
